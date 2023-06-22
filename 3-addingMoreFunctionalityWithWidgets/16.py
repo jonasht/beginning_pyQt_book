@@ -102,8 +102,63 @@ class LoginWindow(QWidget):
             
             # create file if it doesnt exit/ criar file se ele nao existe
             f = open(file, 'w')
+        
+    def displayPasswordIfChecked(self, checked):
+        if checked:
+            self.le_password.setEchoMode(QLineEdit.EchoMode.Normal)
+        
+        elif checked == False:
+            self.le_password.setEchoMode(QLineEdit.EchoMode.Password)
+    
+    def createNewUser(self):
+        self.create_new_user = NewUserDialog()
+        self.create_new_user.show()
+
+    def openApplicationWindow(self):
+        self.main_window = MainWindow()
+        self.main_window.show()
+
+    def closeEvent(self, event):
+        if self.login_is_successful == True:
+            event.accept()
+        else:
+            answer = QMessageBox.question(
+                self, 'quit application?',
+                'are you sure you want to quit?',
+                QMessageBox.StandardButton.No | \ QMessageBox.StandardButton.Yes,
+                QMessageBox.StandardButton.Yes
+            )
+            if answer == QMessageBox.StandardButton.Yes:
+                event.accept()
+            if answer == QMessageBox.StandardButton.No:
+                event.ignore()
+
+class MainWindow(QWidget):
+    def __init__(self) -> None:
+        super().__init__()
+        self.initializeUI()
+
+    def initializeUI(self):
+        self.setMinimumSize(640, 426)
+        self.setWindowTitle('main window')
+        self.setUpMainWindow()
+
+    def setUpMainWindow(self):
+        image = 'images/background_kingfisher.jpg'
+
+        try:
+            with open(image):
+                lb_main = QLabel(self)
+                pixmap = QPixmap(image)
+                lb_main.setPixmap(pixmap)
+                lb_main.move(0, 0)
+
+        except FileNotFoundError as error:
+            print(f'image not found. \n error: {error}')
             
 
+
+    
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = LoginWindow()

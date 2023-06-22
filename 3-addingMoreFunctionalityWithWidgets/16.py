@@ -12,18 +12,18 @@ class LoginWindow(QWidget):
     def __init__(self) -> None:
         super().__init__()
         self.initializeUI()
-    
+
     def initializeUI(self):
         self.setFixedSize(360, 220)
         self.setWindowTitle('login')
 
         self.setUpWindow()
-        
+
         self.show()
-        
+
     def setUpWindow(self):
         self.login_is_successful = False
-        
+
         lb_login = QLabel('login', self)
         lb_login.setFont(QFont('Arial', 20))
         lb_login.move(160, 10)
@@ -43,13 +43,13 @@ class LoginWindow(QWidget):
 
         self.le_password.resize(250, 24)
         self.le_password.move(90, 82)
-        
+
         self.cb_showPassword = QCheckBox('show password', self)
         self.cb_showPassword.move(90, 110)
 
         self.cb_showPassword.toggled.connect(self.displayPasswordIfChecked)
 
-        # 
+        #
         bt_login = QPushButton('login', self)
         bt_login.resize(320, 34)
         bt_login.move(20, 140)
@@ -61,7 +61,7 @@ class LoginWindow(QWidget):
         bt_sign_up = QPushButton('sign up', self)
         bt_sign_up.move(120, 180)
         bt_sign_up.clicked.connect(self.createNewUser)
-    
+
     def clickLoginButton(self):
         users = {}
         file = 'file/users.txt'
@@ -73,7 +73,7 @@ class LoginWindow(QWidget):
                     username_info = user_info[0]
                     password_info = user_info[1].strip('\n')
                     users[username_info] = password_info
-            
+
             username = self.le_username.text()
             password = self.le_password.text()
 
@@ -84,32 +84,32 @@ class LoginWindow(QWidget):
                                         QMessageBox.StandardButton.Ok,
                                         QMessageBox.StandardButton.Ok
                                         )
-                self.login_is_successful =True
+                self.login_is_successful = True
                 self.close()
                 self.openApplicationWindow()
             else:
-                QMessageBox.warning(self, 'error message', 'the username or password is incorrect', 
+                QMessageBox.warning(self, 'error message', 'the username or password is incorrect',
                                     QMessageBox.StandardButton.Close,
                                     QMessageBox.StandardButton.Close)
 
         except FileNotFoundError as error:
             QMessageBox.warning(self, 'error',
-                                f'''<p> file not found </p>''',
+                                '''<p> file not found </p>''',
                                 f'''error: {error} ''',
                                 QMessageBox.StandardButton.Ok
-                                
+
                                 )
-            
+
             # create file if it doesnt exit/ criar file se ele nao existe
             f = open(file, 'w')
-        
+
     def displayPasswordIfChecked(self, checked):
         if checked:
             self.le_password.setEchoMode(QLineEdit.EchoMode.Normal)
-        
+
         elif checked == False:
             self.le_password.setEchoMode(QLineEdit.EchoMode.Password)
-    
+
     def createNewUser(self):
         self.create_new_user = NewUserDialog()
         self.create_new_user.show()
@@ -119,19 +119,20 @@ class LoginWindow(QWidget):
         self.main_window.show()
 
     def closeEvent(self, event):
-        if self.login_is_successful == True:
+        if self.login_is_successful:
             event.accept()
         else:
             answer = QMessageBox.question(
                 self, 'quit application?',
                 'are you sure you want to quit?',
-                QMessageBox.StandardButton.No | \ QMessageBox.StandardButton.Yes,
+                QMessageBox.StandardButton.No | QMessageBox.StandardButton.Yes,
                 QMessageBox.StandardButton.Yes
             )
             if answer == QMessageBox.StandardButton.Yes:
                 event.accept()
             if answer == QMessageBox.StandardButton.No:
                 event.ignore()
+
 
 class MainWindow(QWidget):
     def __init__(self) -> None:
@@ -155,13 +156,10 @@ class MainWindow(QWidget):
 
         except FileNotFoundError as error:
             print(f'image not found. \n error: {error}')
-            
 
 
-    
 if __name__ == '__main__':
+
     app = QApplication(sys.argv)
     window = LoginWindow()
-    
     sys.exit(app.exec())
-    

@@ -26,6 +26,7 @@ class NewUserDialog(QDialog):
             with open(user_image):
                 lb_user = QLabel(self)
                 pixmap = QPixmap(user_image)
+                lb_user.setPixmap(pixmap)
                 lb_user.move(150, 60)
         except FileNotFoundError as error:
             print(
@@ -60,3 +61,24 @@ class NewUserDialog(QDialog):
         self.le_confirm.setEchoMode(QLineEdit.EchoMode.Password)
         self.le_confirm.resize(250, 24)
         self.le_confirm.move(90, 230)
+        bt_sign_up = QPushButton('sign up', self)
+        bt_sign_up.resize(320, 32)
+        bt_sign_up.move(20, 270)
+        bt_sign_up.clicked.connect(self.confirmSignUp)
+
+    def confirmSignUp(self):
+        name_text = self.le_name.text()
+        password_text = self.le_new_password.text()
+
+        confirm_text = self.le_confirm.text()
+
+        if name_text == '' or password_text == '':
+            QMessageBox.warning(self, 'error message',
+                                'please enter username ou password values',
+                                QMessageBox.StandardButton.Close,
+                                QMessageBox.StandardButton.Close)
+        elif password_text != confirm_text:
+            QMessageBox(self, 'error message',
+                        'the passwords you entered do not match.',
+                        QMessageBox.StandardButton.Close,
+                        QMessageBox.StandardButton.Close)

@@ -28,6 +28,7 @@ class Window(QWidget):
                 world_label = QLabel(self)
                 pixmap = QPixmap(image)
                 world_label.setPixmap(pixmap)
+                world_label.move(25,40)
         except FileNotFoundError as error:
             print(f'image not found.\n error: {error}')
             print('imagem nao encontrada')

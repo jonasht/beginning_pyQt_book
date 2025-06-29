@@ -1,0 +1,6 @@
+PRIMARY = 'primary'
+SECONDARY = 'secondary'
+SUCCESS = 'success'
+WARNING = 'warning'
+INFO = 'info'
+DANGER = 'danger'

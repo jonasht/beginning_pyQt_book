@@ -4,7 +4,9 @@ from PyQt6.QtWidgets import QPushButton, QLabel, QLineEdit, QVBoxLayout, QHBoxLa
 
 from PyQt6.QtCore import Qt
 
-from teste_app3_util import *
+from util import *
+
+import qdarktheme
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -75,7 +77,7 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     
     
-    with open('./teste_estilo3.css', 'r') as f:
+    with open('./Style.css', 'r') as f:
         qss = f.read()
         app.setStyleSheet(qss)
 

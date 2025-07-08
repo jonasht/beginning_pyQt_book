@@ -1,3 +1,4 @@
+import textwrap
 PRIMARY = 'primary'
 SECONDARY = 'secondary'
 SUCCESS = 'success'
@@ -6,34 +7,49 @@ INFO = 'info'
 WARNING = 'warning'
 LINK = 'link'
 
-import textwrap
+OUTLINE_INFO = 'info-outline'
 
-class Text:
-    title = textwrap.dedent("""
-        color: white;
-        font-weight: 200;
-        font-size: 20px;
-        background-color: #0dcaf0;
-        padding: 6px 24px;
-        border-bottom-left-radius: 24px;
-        border-bottom-right-radius: 24px;
+INVERSE_INFO = 'info-inverse'
+
+class TopTitle:
+        # background-color: #9933cc;
+    # label
+    lb = textwrap.dedent("""
+        color: #ffffff;
+        font-weight: 400;
+        font-size: 12px;
     """).strip()
-        
+    
+    # frame
+    fr = textwrap.dedent('''
+        border-bottom-right-radius: 36px;
+        border-bottom-left-radius: 36px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+          ''').strip()
+    
 def get_style():
     with open('./styleV3.css', 'r') as file:
         return file.read()
 
 class Colors:
-    primary = "#0d6efd"
-    secondary = "#6c757d"
-    success = "#198754"
-    danger = "#dc3545"
-    warning = "#ffc107"
-    info = "#0dcaf0"
-    dark = "#212529"
-    light = "#f8f9fa"
-    white = "#fff"
-    black = "#000"
+    primary = "#2a9fd6"
+    secondary = "#555555"
+    success = "#77b300"
+    danger = "#cc0000"
+    warning = "#ff8800"
+    info = "#9933cc"
+    dark = "#222222"
+    light = "#ADAFAE"
+    white = "#ffffff"
+    black = "#060606"
+    bg = "#060606"
+    fg = "#ffffff"
+    selectbg = "#454545"
+    selectfg = "#ffffff"
+    border = "#060606"
+    inputfg = "#ffffff"
+    inputbg = "#191919"
 
 if __name__ == '__main__':
     # teste

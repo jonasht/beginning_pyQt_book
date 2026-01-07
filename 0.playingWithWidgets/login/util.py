@@ -21,13 +21,14 @@ class TopTitle:
     """).strip()
     
     # frame
-    fr = textwrap.dedent('''
+    frame = textwrap.dedent('''
         border-bottom-right-radius: 36px;
         border-bottom-left-radius: 36px;
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
           ''').strip()
-    
+
+
 def get_style():
     with open('./styleV3.css', 'r') as file:
         return file.read()
@@ -52,5 +53,4 @@ class Colors:
     inputbg = "#191919"
 
 if __name__ == '__main__':
-    # teste
-    print(Colors.primary)
+    print(get_geometry())

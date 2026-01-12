@@ -1,0 +1,1 @@
+https://coderscratchpad.com/pyqt6-custom-drawing-with-qpainter/
